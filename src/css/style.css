@@ -1,0 +1,15 @@
+@font-face {
+    font-family: Prompt;
+    src: url(../fonts/Prompt/Prompt-Regular.ttf);
+}
+body {
+    background-color: #d8c5a1;
+}
+* {
+    font-family: Prompt;
+}
+
+.container-main {
+    background-color: white;
+    transform: (1,5deg);
+}
