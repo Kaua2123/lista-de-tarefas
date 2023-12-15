@@ -71,8 +71,7 @@ ul li {
 }
 
 .delete-tarefa {
-    background: white;
-    border: none;
+    background: rgb(255, 255, 255);
     font-size: 22px;
     position: absolute;
     right: 0px;
