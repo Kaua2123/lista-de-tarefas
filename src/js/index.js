@@ -30,16 +30,26 @@
         botao.classList.add("delete-tarefa");
         //o botão criado ja terá um escutador de eventos
         botao.addEventListener('click', (e) => {
-            apagaTarefa(e);
+            apagaTarefa();
         })
         return botao;
     }
 
-    const apagaTarefa = (e) => {
-        console.log("apagar chamado")
-        const index = e.target;
-        arrayStorage.splice(index, 1);
-        localStorage.setItem("tarefas", arrayStorage)
+    const apagaTarefa = () => {
+        document.addEventListener('click', (e) => {
+            const el = e.target;
+
+            if (el.classList.contains('delete-tarefa')) {
+                console.log(e)
+                const xd = el.parentElement.remove();
+                console.log(xd)
+                arrayStorage.splice(xd, 1);
+                localStorage.setItem("tarefas", arrayStorage)
+            }
+        })
+        //descobrr qual indice escolhido/clicado
+
+
     }
 
     const criaTarefa = () => {
@@ -49,11 +59,10 @@
             if (!itsArray || !localStorage.itsArray) {
 
                 console.log(itsArray)
-                arrayStorage = localStorage.getItem("tarefas").split(/[\s,]+/);
+                arrayStorage = localStorage.getItem("tarefas").split();
                 arrayStorage.push(addTarefas.value);
-                localStorage.setItem("tarefas", (arrayStorage))
+                localStorage.setItem("tarefas", arrayStorage)
                 localStorage.setItem("itsArray", true);
-
             }
             else {
                 arrayStorage.push(addTarefas.value);
@@ -70,6 +79,7 @@
     }
 
     const exibeTarefa = () => {
+
         const li = criaLi();
         const botao = criaBotao();
         li.innerText = localStorage.getItem("tarefas").split();
