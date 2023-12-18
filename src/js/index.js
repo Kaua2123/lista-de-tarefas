@@ -24,31 +24,41 @@
         return li;
     }
 
-    // const criaBotao = () => {
-    //     const botao = document.createElement("button");
-    //     botao.classList.add("delete-tarefa");
-    //     return botao;
-    // }
+    const criaBotao = () => {
+        const botao = document.createElement("button");
+        botao.innerHTML = 'Apagar'
+        botao.classList.add("delete-tarefa");
+        //o botão criado ja terá um escutador de eventos
+        botao.addEventListener('click', (e) => {
+            apagaTarefa(e);
+        })
+        return botao;
+    }
 
+    const apagaTarefa = (e) => {
+        console.log("apagar chamado")
+        const index = e.target;
+        arrayStorage.splice(index, 1);
+        localStorage.setItem("tarefas", arrayStorage)
+    }
 
-    
     const criaTarefa = () => {
-
         
         if (localStorage.tarefas) {
-            
+            //cai aqui se n for array
             if (!itsArray || !localStorage.itsArray) {
-                arrayStorage = localStorage.getItem("tarefas").split(" ");
+
+                console.log(itsArray)
+                arrayStorage = localStorage.getItem("tarefas").split(/[\s,]+/);
                 arrayStorage.push(addTarefas.value);
-                localStorage.setItem("tarefas", JSON.stringify(arrayStorage))
-                itsArray = true;
+                localStorage.setItem("tarefas", (arrayStorage))
                 localStorage.setItem("itsArray", true);
+
             }
             else {
                 arrayStorage.push(addTarefas.value);
-                localStorage.setItem("tarefas", JSON.stringify(arrayStorage))
+                localStorage.setItem("tarefas", arrayStorage);
             }
-
 
         }
         else {
@@ -56,18 +66,29 @@
             localStorage.setItem("tarefas", arrayDeTarefas)
         }
 
-
         exibeTarefa();
     }
 
     const exibeTarefa = () => {
-
         const li = criaLi();
-        li.innerText = localStorage.getItem("tarefas");
+        const botao = criaBotao();
+        li.innerText = localStorage.getItem("tarefas").split();
         tarefas.appendChild(li);
-
+        li.appendChild(botao);
     }
-    //localstoragte ta sempre sobrescrevendo, então n consigo armazenar dps q recarrego.
-    //fica armazenado, mas se crio uam nova tarefa dps de recarregar, sobrescreve as q tinha
-    exibeTarefa();
+
+    const exibeTarefaLocalStorage = () => {
+
+        arrayStorage = localStorage.getItem("tarefas").split(',');
+        for (let i = 0; i < arrayStorage.length; i++) {
+            const li = criaLi();
+            const botao = criaBotao();
+            li.innerText = arrayStorage[i];
+            tarefas.appendChild(li);
+            li.appendChild(botao);
+        }
+    }
+
+   
+    exibeTarefaLocalStorage();
 })()

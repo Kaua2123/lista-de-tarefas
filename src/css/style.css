@@ -51,6 +51,7 @@ body {
     font-size: 14px;        
     color: white;
     border: none;
+    transition: 0.2s;
 }
 .btn-add-tarefas:hover {
     cursor: pointer;
@@ -67,19 +68,23 @@ ul li {
     list-style: none;
     position: relative;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgb(235, 235, 235);
+
 }
 
 .delete-tarefa {
-    background: rgb(255, 255, 255);
-    font-size: 22px;
+    background: #d8c5a1;
+    font-size: 13px;
     position: absolute;
     right: 0px;
     margin-right: 40px;
+    transition: 0.1s;
+    border-radius: 8px;
+    border: none;
 }
 
 .delete-tarefa:hover {
     cursor: pointer;
-    font-size: 24px;
-    align-items: flex-end;
+    font-size: 15px;
+    color: white;
+    background-color: #998b70;
 }
